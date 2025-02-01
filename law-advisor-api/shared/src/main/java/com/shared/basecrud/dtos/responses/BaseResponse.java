@@ -1,25 +1,81 @@
 package com.shared.basecrud.dtos.responses;
 
+import com.shared.basecrud.dtos.BaseDto;
+import com.shared.models.enums.Services;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import com.shared.basecrud.dtos.tables.BaseTableRowDto;
+public class BaseResponse extends BaseDto {
 
-public abstract class BaseResponse{
+  private LocalDateTime responseTimestamp;
+  private String status;
+  private Services serviceName;
+  private String message;
+  private String error;
+  private String uri;
 
-    private LocalDateTime responseTimestamp;
-    private String status;
+  public BaseResponse() {
+    this.responseTimestamp = LocalDateTime.now();
+  }
 
-    public BaseResponse(String status) {
-        this.responseTimestamp = LocalDateTime.now();
-        this.status = status;
-    }
+  public void setErrorParameters(
+      String error, String message, Services serviceName, String uri, String status) {
+    this.status = status;
+    this.error = error;
+    this.message = message;
+    this.serviceName = serviceName;
+    this.uri = uri;
+  }
 
-    public LocalDateTime getResponseTimestamp() {
-        return responseTimestamp;
-    }
+  public BaseResponse(
+      Services serviceName, String error, String message, String status, String uri) {
+    this.status = status;
+    this.error = error;
+    this.message = message;
+    this.serviceName = serviceName;
+    this.uri = uri;
+  }
 
-    public String getStatus() {
-        return status;
-    }
+  public LocalDateTime getResponseTimestamp() {
+    return responseTimestamp;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public String setStatus(String status) {
+    return status;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public String getError() {
+    return error;
+  }
+
+  public void setError(String error) {
+    this.error = error;
+  }
+
+  public Services getServiceName() {
+    return serviceName;
+  }
+
+  public void setServiceName(Services serviceName) {
+    this.serviceName = serviceName;
+  }
+
+  public String getUri() {
+    return this.uri;
+  }
+
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
 }
